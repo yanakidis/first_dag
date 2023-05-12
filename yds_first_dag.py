@@ -1,4 +1,4 @@
-﻿"""
+"""
 Домашнее задание по AirFlow для стажеров
 """
 
@@ -36,8 +36,7 @@ with DAG(
 	cursor = pg_conn.cursor()
 
 	def drop_tbl(**kwargs):
-		sql_drop =
-		'''
+		sql_drop = '''
 		drop table if exists postgres.public.yanakov_tab; 
 		commit;
 		'''
@@ -48,8 +47,7 @@ with DAG(
 
 	def create_tbl(**kwargs):
 		#Создаем таблицу и sequence
-		sql_create =
-		'''
+		sql_create = '''
 		create table if not exists postgres.public.yanakov_tab
 			(id  serial primary key, 
 			surname varchar(32), 
@@ -62,13 +60,12 @@ with DAG(
 
 	def insert_from_airflow(**kwargs):
 		# Запуск sql скрипта напрямую из airflow
-		sql_from_airflow =
-		''' 
+		sql_from_airflow = ''' 
 		insert into postgres.public.yanakov_tab(surname, university, grad_year, t_changed_dttm) 
 		values 
-		('Yanakov', 'Lomonosov MSU', 2023, NOW());
-		('Musk', 'Stanford', 1995, NOW());
-		('Gates', 'Harvard', 1975, NOW());
+		('Yanakov', 'Lomonosov MSU', 2023, NOW()),
+		('Musk', 'Stanford', 1995, NOW()),
+		('Gates', 'Harvard', 1975, NOW()),
 		('Brin', 'Stanford', 1995, NOW());
 		commit; 
 		'''
